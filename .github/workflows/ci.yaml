@@ -1,0 +1,24 @@
+
+name: PortHoundX Diagnostics
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: "Target host (IP/DNS)"
+        required: true
+      ports:
+        description: "Ports to scan (space separated)"
+        required: false
+        default: "22 80 443"
+
+jobs:
+  run-diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Run PortHoundX
+        run: python porthoundx.py --host ${{ github.event.inputs.host }} --ports ${{ github.event.inputs.ports }} --detect-services

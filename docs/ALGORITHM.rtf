@@ -1,0 +1,81 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 PortHoundX - Algorithm & Design\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 Overview\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 PortHoundX is a multi-purpose diagnostic tool for {\b port scanning, service detection, and cloud provider awareness}.\line It supports both {\b CLI} and {\b GUI} modes for usability.\par}
+{\pard \qc \f0 \sa180 \li0 \fi0 \emdash\emdash\emdash\emdash\emdash\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 High-Level Algorithm\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 1. Input Phase\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Accepts a {\b host} (IP or DNS name).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Accepts a list of {\b ports} to scan (default: 22, 80, 443).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Options:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab JSON output ({\f1 --json}).\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Service detection ({\f1 --detect-services}).\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab GUI mode ({\f1 --gui}).\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 2. Resolution Phase\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Resolve hostname \u8594? IP ({\f1 socket.gethostbyname}).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Check if the IP is {\b private or public} ({\f1 ipaddress} library).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 3. Connectivity Phase\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\b Ping Test} \u8594? Check if host is reachable.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\b Port Scan} \u8594? For each port:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Try connecting via {\f1 socket.create_connection}.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Mark port as open or closed.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 4. Service Detection (Optional)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If a port is open, map it to a known service (e.g., 22 \u8594? SSH, 80 \u8594? HTTP, 443 \u8594? HTTPS, etc.).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 5. Cloud Detection\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Query {\f1 ipinfo.io} API to detect cloud provider (AWS, GCP, Azure, IBM, Other).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 6. Output Phase\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If JSON enabled \u8594? structured machine-readable output.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Otherwise \u8594? human-readable CLI with colors ({\f1 colorama}).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab GUI mode \u8594? Tkinter window with inputs & scrollable results.\sa180\par}
+{\pard \qc \f0 \sa180 \li0 \fi0 \emdash\emdash\emdash\emdash\emdash\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 Files & Roles\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 {\f1 porthoundx.py}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Main entrypoint.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Handles:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Argument parsing (CLI).\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab GUI launch.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Orchestrates functions from {\f1 utils.py}.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel2 \b \fs28 {\f1 utils.py}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Helper functions:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 resolve_host()} \u8594? DNS resolution.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 is_private_ip()} \u8594? Check if IP is private.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 check_ping()} \u8594? Host reachability.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 check_port()} \u8594? TCP port scanning.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 detect_service()} \u8594? Service mapping.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 detect_cloud()} \u8594? Cloud provider detection.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 pretty_format()} \u8594? CLI color formatting.\sa180\sa180\par}
+{\pard \qc \f0 \sa180 \li0 \fi0 \emdash\emdash\emdash\emdash\emdash\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 Flowchart (Simplified)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1  Start\line
+   |\line
+   v\line
+ Get Input (host, ports, options)\line
+   |\line
+   v\line
+ Resolve Host \u8594? IP \u8594? Private/Public\line
+   |\line
+   v\line
+ Ping Host \u8594? Reachable?\line
+   |\line
+   v\line
+ For each port:\line
+     Open? \u8594? (Yes) \u8594? Detect Service\line
+   |\line
+   v\line
+ Detect Cloud Provider\line
+   |\line
+   v\line
+ Format Output \u8594? CLI / JSON / GUI\line
+   |\line
+   v\line
+ End\par}
+{\pard \qc \f0 \sa180 \li0 \fi0 \emdash\emdash\emdash\emdash\emdash\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 Future Extensions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Async scanning for speed (e.g., {\f1 asyncio}).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab OS fingerprinting.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Export results to CSV/DB.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Plugin system for new protocols.\sa180\par}
+}

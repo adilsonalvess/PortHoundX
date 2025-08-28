@@ -1,0 +1,23 @@
+# Core networking and system libraries
+ipaddress
+socket
+
+# CLI enhancements
+argparse
+colorama
+
+# GUI
+tk
+
+# Optional JSON handling
+jsonlib-python3
+
+# Requests for cloud provider detection or HTTP checks
+requests
+
+# For better cross-platform ping/traceroute if extended
+pythonping
+
+# Optional for future AI-assisted reasoning module
+numpy
+pandas
